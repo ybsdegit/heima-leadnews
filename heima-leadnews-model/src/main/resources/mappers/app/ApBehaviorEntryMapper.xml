@@ -13,7 +13,7 @@
   </sql>
 
     <!-- 选择用户的行为对象，优先按用户选择 -->
-    <select id="selectByUserIdOrEquipment" resultMap="BaseResultMap" >
+    <select id="selectByUserIdOrEquipemntId" resultMap="BaseResultMap" >
         <if test="userId!=null">
             /*!mycat:sql=select id from ap_behavior_entry where burst='0-${userId}'*/
             select * from ap_behavior_entry a where  a.entry_id=#{userId} and type=1 limit 1

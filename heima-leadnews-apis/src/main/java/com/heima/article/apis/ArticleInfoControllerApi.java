@@ -2,7 +2,6 @@ package com.heima.article.apis;
 
 import com.heima.model.article.dtos.ArticleInfoDto;
 import com.heima.model.common.dtos.ResponseResult;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * ArticleInfoControllerApi
@@ -14,5 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public interface ArticleInfoControllerApi {
 
     public ResponseResult loadArticleInfo(ArticleInfoDto dto);
+
+    public ResponseResult loadArticleBehavior(ArticleInfoDto dto);
 
 }

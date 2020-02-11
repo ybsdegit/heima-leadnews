@@ -88,16 +88,14 @@ public class AppArticleInfoServiceImpl implements AppArticleInfoService {
     public ResponseResult loadArticleBehavior(ArticleInfoDto dto) {
         ApUser user = AppThreadLocalUtils.getUser();
         // 用户和设备不能同时为空
-        if (user==null && dto.getEquipmentId()==null){
+        if(user==null&& dto.getEquipmentId()==null){
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_REQUIRE);
         }
-
         Long userId = null;
-        if (user != null){
+        if(user!=null){
             userId = user.getId();
         }
-        ApBehaviorEntry apBehaviorEntry = apBehaviorEntryMapper.selectByUserIdOrEquipemntId(user.getId(), dto.getEquipmentId());
-        // 行为实体找以及注册了，逻辑上这里是必定有值得，除非参数错误
+        ApBehaviorEntry apBehaviorEntry = apBehaviorEntryMapper.selectByUserIdOrEquipemntId(userId, dto.getEquipmentId());// 行为实体找以及注册了，逻辑上这里是必定有值得，除非参数错误
         if(apBehaviorEntry==null){
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
         }
