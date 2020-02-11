@@ -1,8 +1,10 @@
 package com.heima.article.controller.v1;
 
+import com.alibaba.fastjson.JSON;
 import com.heima.article.ArticleJarApplication;
 import com.heima.model.article.dtos.ArticleInfoDto;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,9 +16,6 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.io.IOException;
-
 /**
  * ArticleInfoControllerTest
  *
@@ -24,30 +23,40 @@ import java.io.IOException;
  * @date 2020/2/10 22:16
  */
 
-@SpringBootTest
+@SpringBootTest(classes = ArticleJarApplication.class)
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 public class ArticleInfoControllerTest {
-    // 使用mockmvc测试
+
+    //使用mockmvc
     @Autowired
     MockMvc mvc;
 
-    @Autowired
-    ObjectMapper mapper;
+//    @Autowired
+//    ObjectMapper mapper;
 
-
+    @Test
     public void testLoadArticleInfo() throws Exception {
-
-        ArticleInfoDto articleInfoDto = new ArticleInfoDto();
-        articleInfoDto.setArticleId(1);
-
-        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/api/v1/article/load_article_info")
+        ArticleInfoDto dto = new ArticleInfoDto();
+        dto.setArticleId(1);
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders
+                .post("/api/v1/article/load_article_info")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(mapper.writeValueAsBytes(articleInfoDto));
-
-        mvc.perform(builder).andExpect(MockMvcResultMatchers
-                .status()
-                .isOk())
+                .content(JSON.toJSONString(dto));
+        mvc.perform(builder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void testLoadArticleBehavior() throws Exception {
+        ArticleInfoDto dto = new ArticleInfoDto();
+        dto.setArticleId(1);
+        dto.setEquipmentId(1);
+        dto.setAuthorId(1);
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/api/v1/article/load_article_behavior")
+//                .contentType(MediaType.APPLICATION_JSON_VALUE).content(mapper.writeValueAsBytes(dto));
+                .contentType(MediaType.APPLICATION_JSON_VALUE).content(JSON.toJSONString(dto));
+        mvc.perform(builder).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
     }
 }
