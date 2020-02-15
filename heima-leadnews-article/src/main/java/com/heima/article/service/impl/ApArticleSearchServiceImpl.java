@@ -2,10 +2,12 @@ package com.heima.article.service.impl;
 
 import com.heima.article.service.ApArticleSearchService;
 import com.heima.model.article.dtos.UserSearchDto;
+import com.heima.model.article.pojos.ApAssociateWords;
 import com.heima.model.article.pojos.ApHotWords;
 import com.heima.model.behavior.pojos.ApBehaviorEntry;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;
+import com.heima.model.mappers.app.ApAssociateWordsMapper;
 import com.heima.model.mappers.app.ApBehaviorEntryMapper;
 import com.heima.model.mappers.app.ApHotWordsMapper;
 import com.heima.model.mappers.app.ApUserSearchMapper;
@@ -39,6 +41,9 @@ public class ApArticleSearchServiceImpl implements ApArticleSearchService {
 
     @Autowired
     private ApHotWordsMapper apHotWordsMapper;
+
+    @Autowired
+    private ApAssociateWordsMapper apAssociateWordsMapper;
 
 
     @Override
@@ -92,6 +97,15 @@ public class ApArticleSearchServiceImpl implements ApArticleSearchService {
         List<ApHotWords> apHotWords = apHotWordsMapper.queryByHotDate(date);
 
         return ResponseResult.okResult(apHotWords);
+    }
+
+    @Override
+    public ResponseResult searchAssociate(UserSearchDto dto) {
+        if (dto.getPageSize() > 50 || dto.getPageSize() < 1){
+            return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+        }
+        List<ApAssociateWords> apAssociateWords = apAssociateWordsMapper.selectByAssociateWords("%" + dto.getSearchWords() + "%", dto.getPageSize());
+        return ResponseResult.okResult(apAssociateWords);
     }
 
     public ResponseResult getEntryId(UserSearchDto dto){

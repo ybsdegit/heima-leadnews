@@ -47,4 +47,10 @@ public class ArticleSearchController implements ArticleSearchControllerApi {
     public ResponseResult hotKeyWords(@RequestBody UserSearchDto dto) {
         return apArticleSearchService.hotKeywords(dto.getHotDate());
     }
+
+    @Override
+    @PostMapping("/associate_search")
+    public ResponseResult searchAssociate(@RequestBody UserSearchDto dto) {
+        return apArticleSearchService.searchAssociate(dto);
+    }
 }

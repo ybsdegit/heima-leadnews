@@ -39,4 +39,11 @@ public interface ArticleSearchControllerApi {
      * @return
      */
     ResponseResult hotKeyWords(UserSearchDto dto);
+
+    /**
+     * 联想词查询
+     * @param dto
+     * @return
+     */
+    ResponseResult searchAssociate(UserSearchDto dto);
 }

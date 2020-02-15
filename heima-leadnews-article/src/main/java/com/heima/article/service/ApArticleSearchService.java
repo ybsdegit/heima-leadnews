@@ -37,4 +37,12 @@ public interface ApArticleSearchService {
      @return
      */
     ResponseResult hotKeywords(String date);
+
+    /**
+     * 联想词查询
+     * 模糊查询
+     * @param dto
+     * @return
+     */
+    ResponseResult searchAssociate(UserSearchDto dto);
 }
