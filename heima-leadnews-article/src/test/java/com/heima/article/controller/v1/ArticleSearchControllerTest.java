@@ -81,4 +81,18 @@ public class ArticleSearchControllerTest {
         mvc.perform(builder).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
     }
 
+
+    @Test
+    public void testHotKeyWords() throws Exception {
+
+        UserSearchDto dto = new UserSearchDto();
+//        dto.setHotDate("2020-02-15");
+//        dto.setHotDate("2019-07-24");
+        MockHttpServletRequestBuilder builder =
+                MockMvcRequestBuilders.post("/api/v1/article/search/load_hot_keywords")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(mapper.writeValueAsBytes(dto));
+        mvc.perform(builder).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+    }
+
 }

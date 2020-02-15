@@ -2,17 +2,22 @@ package com.heima.article.service.impl;
 
 import com.heima.article.service.ApArticleSearchService;
 import com.heima.model.article.dtos.UserSearchDto;
+import com.heima.model.article.pojos.ApHotWords;
 import com.heima.model.behavior.pojos.ApBehaviorEntry;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;
 import com.heima.model.mappers.app.ApBehaviorEntryMapper;
+import com.heima.model.mappers.app.ApHotWordsMapper;
 import com.heima.model.mappers.app.ApUserSearchMapper;
 import com.heima.model.user.pojos.ApUser;
 import com.heima.model.user.pojos.ApUserSearch;
 import com.heima.utils.threadlocal.AppThreadLocalUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,8 +33,13 @@ public class ApArticleSearchServiceImpl implements ApArticleSearchService {
 
     @Autowired
     private ApBehaviorEntryMapper apBehaviorEntryMapper;
+
     @Autowired
     private ApUserSearchMapper apUserSearchMapper;
+
+    @Autowired
+    private ApHotWordsMapper apHotWordsMapper;
+
 
     @Override
     public ResponseResult findUserSearch(UserSearchDto dto) {
@@ -72,6 +82,16 @@ public class ApArticleSearchServiceImpl implements ApArticleSearchService {
         }
         int count = apUserSearchMapper.clearUserSearch((int) result.getData());
         return ResponseResult.okResult(count);
+    }
+
+    @Override
+    public ResponseResult hotKeywords(String date) {
+        if (StringUtils.isEmpty(date)){
+            date = DateFormatUtils.format(new Date(), "yyyy-MM-dd");
+        }
+        List<ApHotWords> apHotWords = apHotWordsMapper.queryByHotDate(date);
+
+        return ResponseResult.okResult(apHotWords);
     }
 
     public ResponseResult getEntryId(UserSearchDto dto){

@@ -31,4 +31,12 @@ public interface ArticleSearchControllerApi {
      * @return
      */
     ResponseResult clearUserSearch(UserSearchDto dto);
+
+
+    /**
+     * 今日热词
+     * @param dto
+     * @return
+     */
+    ResponseResult hotKeyWords(UserSearchDto dto);
 }

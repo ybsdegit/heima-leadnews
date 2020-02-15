@@ -32,4 +32,9 @@ public interface ApArticleSearchService {
      */
     ResponseResult clearUserSearch(UserSearchDto dto);
 
+    /**
+     今日热词
+     @return
+     */
+    ResponseResult hotKeywords(String date);
 }
