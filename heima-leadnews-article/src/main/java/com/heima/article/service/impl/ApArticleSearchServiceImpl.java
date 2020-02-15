@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * ApArticleSearchServiceImpl
@@ -30,7 +31,6 @@ public class ApArticleSearchServiceImpl implements ApArticleSearchService {
     @Autowired
     private ApUserSearchMapper apUserSearchMapper;
 
-
     @Override
     public ResponseResult findUserSearch(UserSearchDto dto) {
         if (dto.getPageSize() > 50 || dto.getPageSize() < 0){
@@ -45,6 +45,33 @@ public class ApArticleSearchServiceImpl implements ApArticleSearchService {
         List<ApUserSearch> list = apUserSearchMapper.selectByEntryId((int) result.getData(), dto.getPageSize());
         return ResponseResult.okResult(list);
 
+    }
+
+    @Override
+    public ResponseResult delUserSearch(UserSearchDto dto) {
+        if (dto.getHisList() == null || dto.getHisList().size()<=0){
+            return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
+        }
+        // 获取行为实体Id
+        ResponseResult result = getEntryId(dto);
+        if (result.getCode() != AppHttpCodeEnum.SUCCESS.getCode()){
+            return result;
+        }
+
+        List<Integer> ids = dto.getHisList().stream().map(ApUserSearch::getId).collect(Collectors.toList());
+        // 根据id修改状态
+        int count = apUserSearchMapper.delUserSearch((int)result.getData(), ids);
+        return ResponseResult.okResult(count);
+    }
+
+    @Override
+    public ResponseResult clearUserSearch(UserSearchDto dto) {
+        ResponseResult result = getEntryId(dto);
+        if (result.getCode() != AppHttpCodeEnum.SUCCESS.getCode()){
+            return result;
+        }
+        int count = apUserSearchMapper.clearUserSearch((int) result.getData());
+        return ResponseResult.okResult(count);
     }
 
     public ResponseResult getEntryId(UserSearchDto dto){

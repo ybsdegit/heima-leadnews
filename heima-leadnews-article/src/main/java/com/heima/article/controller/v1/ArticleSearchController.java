@@ -29,4 +29,16 @@ public class ArticleSearchController implements ArticleSearchControllerApi {
     public ResponseResult findUserSearch(@RequestBody UserSearchDto dto) {
         return apArticleSearchService.findUserSearch(dto);
     }
+
+    @Override
+    @PostMapping("/del_search")
+    public ResponseResult delUserSearch(@RequestBody UserSearchDto dto) {
+        return apArticleSearchService.delUserSearch(dto);
+    }
+
+    @Override
+    @PostMapping("/clear_search")
+    public ResponseResult clearUserSearch(@RequestBody UserSearchDto dto) {
+        return apArticleSearchService.clearUserSearch(dto);
+    }
 }

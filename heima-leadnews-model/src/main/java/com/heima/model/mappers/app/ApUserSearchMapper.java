@@ -20,4 +20,11 @@ public interface ApUserSearchMapper {
      @return
      */
     int delUserSearch(@Param("entryId") Integer entryId,@Param("hisIds") List<Integer> hisIds);
+
+    /**
+     清空用户搜索记录
+     @param entryId
+     @return
+     */
+    int clearUserSearch(Integer entryId);
 }

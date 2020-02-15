@@ -18,4 +18,18 @@ public interface ApArticleSearchService {
      */
     ResponseResult findUserSearch(UserSearchDto dto);
 
+    /**
+     * 删除搜索历史
+     * @param dto
+     * @return
+     */
+    ResponseResult delUserSearch(UserSearchDto dto);
+
+    /**
+     清空搜索历史
+     @param dto
+     @return
+     */
+    ResponseResult clearUserSearch(UserSearchDto dto);
+
 }

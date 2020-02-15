@@ -17,4 +17,18 @@ public interface ArticleSearchControllerApi {
      * @return
      */
     public ResponseResult findUserSearch(UserSearchDto dto);
+
+    /**
+     * 删除历史记录
+     * @param dto
+     * @return
+     */
+    ResponseResult delUserSearch(UserSearchDto dto);
+
+    /**
+     * 清空历史记录
+     * @param dto
+     * @return
+     */
+    ResponseResult clearUserSearch(UserSearchDto dto);
 }

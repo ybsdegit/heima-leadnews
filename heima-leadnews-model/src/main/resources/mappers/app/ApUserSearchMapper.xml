@@ -28,4 +28,9 @@
         </foreach>
         )
     </update>
+    <update id="clearUserSearch">
+    update ap_user_search
+    set status = 0
+    where entry_id = #{entryId} and status = 1
+    </update>
 </mapper>
