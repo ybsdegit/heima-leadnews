@@ -37,7 +37,7 @@ public class ApUserLoginSeriveImpl implements ApUserLoginService {
         if (apUser == null){
             return ResponseResult.errorResult(AppHttpCodeEnum.AP_USER_DATA_NOT_EXIST);
         }
-        if (user.getPassword().equals(apUser.getPassword())){
+        if (!user.getPassword().equals(apUser.getPassword())){
             return ResponseResult.errorResult(AppHttpCodeEnum.LOGIN_PASSWORD_ERROR);
         }
 
