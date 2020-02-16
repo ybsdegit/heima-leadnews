@@ -23,4 +23,6 @@ public interface ApArticleMapper {
      */
     List<ApArticle> loadArticleListByIdList(@Param("list") List<ApUserArticleList> list);
 
+    ApArticle selectById(Long id);
+
 }

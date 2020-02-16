@@ -108,4 +108,19 @@ public class ArticleSearchControllerTest {
         mvc.perform(builder).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    public void testEsArticleSearch() throws Exception {
+
+        UserSearchDto dto = new UserSearchDto();
+        dto.setEquipmentId(1);
+        dto.setPageNum(1);
+        dto.setPageSize(10);
+        dto.setSearchWords("测试");
+        MockHttpServletRequestBuilder builder =
+                MockMvcRequestBuilders.post("/api/v1/article/search/article_search")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(mapper.writeValueAsBytes(dto));
+        mvc.perform(builder).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+    }
+
 }

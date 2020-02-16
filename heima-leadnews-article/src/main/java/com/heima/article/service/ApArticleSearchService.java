@@ -45,4 +45,21 @@ public interface ApArticleSearchService {
      * @return
      */
     ResponseResult searchAssociate(UserSearchDto dto);
+
+    /**
+     * es 文章分页查询
+     * @param dto
+     * @return
+     */
+    ResponseResult esArticleSearch(UserSearchDto dto);
+
+    /**
+     * 保存搜索记录
+     * @param entryId
+     * @param searchWords
+     * @return
+     */
+    ResponseResult saveUserSearch(Integer entryId, String searchWords);
+
+
 }

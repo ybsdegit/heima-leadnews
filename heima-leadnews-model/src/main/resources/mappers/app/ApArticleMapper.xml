@@ -66,4 +66,10 @@
         </trim>
         )
     </select>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="resultMap">
+        select <include refid="Base_Column_List" />
+        from ap_article
+        where id = #{id}
+    </select>
 </mapper>

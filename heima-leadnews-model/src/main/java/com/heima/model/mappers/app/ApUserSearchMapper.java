@@ -27,4 +27,19 @@ public interface ApUserSearchMapper {
      @return
      */
     int clearUserSearch(Integer entryId);
+
+    /**
+     插入搜索记录
+     @param record
+     @return
+     */
+    int insert(ApUserSearch record);
+
+    /**
+     查询记录是否存在
+     @param entryId
+     @param keyword
+     @return
+     */
+    int checkExist(@Param("entryId") Integer entryId,@Param("keyword") String keyword);
 }

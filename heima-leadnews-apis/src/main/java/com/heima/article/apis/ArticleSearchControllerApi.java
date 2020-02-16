@@ -46,4 +46,13 @@ public interface ArticleSearchControllerApi {
      * @return
      */
     ResponseResult searchAssociate(UserSearchDto dto);
+
+
+    /**
+     * es 文章分页查询
+     * @param dto
+     * @return
+     */
+    public ResponseResult esArticleSearch(UserSearchDto dto);
+
 }

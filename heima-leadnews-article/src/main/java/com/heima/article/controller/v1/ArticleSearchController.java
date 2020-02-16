@@ -53,4 +53,10 @@ public class ArticleSearchController implements ArticleSearchControllerApi {
     public ResponseResult searchAssociate(@RequestBody UserSearchDto dto) {
         return apArticleSearchService.searchAssociate(dto);
     }
+
+    @Override
+    @PostMapping("/article_search")
+    public ResponseResult esArticleSearch(@RequestBody UserSearchDto dto) {
+        return apArticleSearchService.esArticleSearch(dto);
+    }
 }
